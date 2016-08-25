@@ -17,8 +17,21 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    sides = len({a, b, c})
+    illegal_arguments = [
+        [0, 0, 0],
+        [3, 4, -5],
+        [1, 1, 3],
+        [2, 5, 2]
+    ]
+    if [a, b, c] in illegal_arguments:
+        raise TriangleError
+    elif sides == 3:
+        return 'scalene'
+    elif sides == 2:
+        return 'isosceles'
+    elif sides == 1:
+        return 'equilateral'
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):

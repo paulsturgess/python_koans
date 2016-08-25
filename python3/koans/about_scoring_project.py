@@ -33,8 +33,33 @@ from runner.koan import *
 # Your goal is to write the score method.
 
 def score(dice):
-    # You need to write this method
-    pass
+    def find_duplicates(number, dice):
+        return [rolled_number for rolled_number in dice if number == rolled_number]
+
+    def remove_duplicates(duplicates):
+        remove_indexes = [0,1,2]
+        return [v for i, v in enumerate(duplicates) if i not in remove_indexes]
+
+    def is_group_of_three(duplicates):
+        return len(duplicates) >= 3
+
+    total = 0
+
+    for number in range(1,7):
+        duplicates = find_duplicates(number, dice)
+        if is_group_of_three(duplicates):
+            if number == 1:
+                total += 1000
+            else:
+                total += number * 100
+            duplicates = remove_duplicates(duplicates)
+        if number == 1:
+            total += 100 * len(duplicates)
+        if number == 5:
+            total += 50 * len(duplicates)
+
+    return total
+
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
